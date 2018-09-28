@@ -23,9 +23,7 @@ fun sum(values: List<Int>): Long {
     if (values.isEmpty()) return 0
 
     var sum: Long = 0
-    for (value in values) {
-        sum += value
-    }
+    values.forEach { sum += it }
 
     return sum
 }
