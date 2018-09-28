@@ -10,9 +10,13 @@ interface Collider {
 /**
  * 2D point with integer coordinates
  */
-class Point(x: Int, y: Int) : Collider {
+class Point(var x: Int, var y: Int) : Collider {
     override fun isColliding(other: Collider): Boolean {
-        TODO("not implemented")
+        when (other) {
+            is Point -> return other == this
+            is Bar -> return other.isContainsPoint(this)
+        }
+        return false
     }
 }
 
@@ -22,8 +26,21 @@ class Point(x: Int, y: Int) : Collider {
  * Bar is not oriented
  * (It does not matter, which opposite corners you choose to define bar)
  */
-class Bar(firstCornerX: Int, firstCornerY: Int, secondCornerX: Int, secondCornerY: Int) : Collider {
+class Bar(var firstCornerX: Int, var firstCornerY: Int, var secondCornerX: Int, var secondCornerY: Int) : Collider {
     override fun isColliding(other: Collider): Boolean {
-        TODO("not implemented")
+        when (other) {
+            is Point -> return isContainsPoint(other)
+            is Bar -> return isCollidingBar(other)
+        }
+        return false
+    }
+
+    fun isCollidingBar(other: Bar): Boolean {
+        return (firstCornerX in (other.firstCornerX..other.secondCornerX) || secondCornerX in (other.firstCornerX..other.secondCornerX)) &&
+                (firstCornerY in (other.firstCornerY..other.secondCornerY) || secondCornerY in (other.firstCornerY..other.secondCornerY))
+    }
+
+    fun isContainsPoint(point: Point): Boolean {
+        return point.x in (firstCornerX..secondCornerX) && point.y in (firstCornerY..secondCornerY)
     }
 }
