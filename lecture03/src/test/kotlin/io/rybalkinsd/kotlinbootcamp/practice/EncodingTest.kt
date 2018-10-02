@@ -44,8 +44,8 @@ class EncodingTest {
     }
 
     @Test
-    fun `decode # Abc`() {
-        assertEquals("Abc", "AlfaBravoCharlie".decode())
+    fun `decode # kotlin`() {
+        assertEquals("kotlin", "KiloOscarTangoLimaIndiaNovember".decode())
     }
 
     @Test
