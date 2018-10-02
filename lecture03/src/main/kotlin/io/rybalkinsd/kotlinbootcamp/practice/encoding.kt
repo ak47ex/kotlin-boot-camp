@@ -39,7 +39,7 @@ val reversedAssociation: Map<String, Char> = alphabet.associate { it -> Pair(it,
  *
  */
 fun String.decode(): String? {
-    var result : String = ""
+    var result: String = ""
     var origin = this
 
     while (!origin.isBlank() && origin.isNotEmpty()) {
@@ -60,11 +60,9 @@ fun String.decode(): String? {
         if (origin.length < offset || found != origin.substring(0, offset)) return null
 
         result = result.plus(found[0].toString())
-        if(offset > origin.length) return null
+        if (offset > origin.length) return null
 
         origin = origin.substring(offset)
-
-
     }
     return result.toLowerCase()
 }
