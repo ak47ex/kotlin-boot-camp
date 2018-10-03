@@ -38,31 +38,9 @@ val reversedAssociation: Map<String, Char> = alphabet.associate { it -> Pair(it,
  * "charliee".decode() == null
  *
  */
-fun String.decode(): String? {
-    var result: String = ""
-    var origin = this
 
-    while (!origin.isBlank() && origin.isNotEmpty()) {
-        val key = origin[0].toLowerCase()
-
-        if (!association.containsKey(key)) {
-            if (key.isDigit() || key.isWhitespace()) {
-                result = result.plus(key.toString())
-                origin = origin.substring(1)
-                continue
-            }
-            return null
-        }
-
-        val found = association[key]
-        val offset = found!!.length
-
-        if (origin.length < offset || found != origin.substring(0, offset)) return null
-
-        result = result.plus(found[0].toString())
-        if (offset > origin.length) return null
-
-        origin = origin.substring(offset)
-    }
-    return result.toLowerCase()
-}
+fun String.decode(): String? = Regex("([A-Z][a-z]*)|([\\d\\s{1,}])|([a-z])").findAll(this)
+            .map { it.value }
+            .map { if (it.toDoubleOrNull() != null || it.isBlank()) it else reversedAssociation[it]?.toString() }
+            .also { if (it.contains(null)) return@decode null }
+            .fold("") { acc, s -> acc.plus(s) }.toLowerCase()
