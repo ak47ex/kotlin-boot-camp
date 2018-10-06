@@ -2,7 +2,6 @@ package io.rybalkinsd.kotlinbootcamp
 
 import org.junit.Test
 
-
 class BoxTest {
     @Test
     fun `box creation`() {
@@ -10,7 +9,7 @@ class BoxTest {
         val nDoubleBox: Box<Double?> = Box(null)
         val doubleBox = Box(4.0)
         // : List<Box<out Number?>>
-        val boxedList = listOf(intBox, doubleBox, nDoubleBox)
+        listOf(intBox, doubleBox, nDoubleBox)
     }
 
     @Test

@@ -1,18 +1,14 @@
 package io.rybalkinsd.kotlinbootcamp
 
-
 import org.junit.Test
 
-
 class ExceptionHandlingTest {
-
     @Test
     fun `try with number format exception`() {
         try {
             val number = "404e1".toInt().also {
                 println(it)
             }
-
         } catch (e: Exception) {
             println("Catch block")
             e.printStackTrace()
@@ -27,7 +23,6 @@ class ExceptionHandlingTest {
             val number = "404e1".toInt().also {
                 println(it)
             }
-
         } catch (e: NumberFormatException) {
             println("NumberFormatException catch")
             e.printStackTrace()

@@ -29,5 +29,4 @@ class BinaryUtilTest {
     fun `broken string convert`() {
         "404e1".toBinary()
     }
-
 }
